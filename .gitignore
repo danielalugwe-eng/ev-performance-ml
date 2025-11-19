@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+
+# Logs
+*.log
+
+# Mac
+.DS_Store
+
+# Models (optional, if you want to track separately)
+# models/
