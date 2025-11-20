@@ -16,11 +16,3 @@ Key Outcomes
 	•	Built a predictive model capable of estimating efficiency from EV characteristics
 	•	Highlighted patterns that can guide manufacturers and engineers in improving energy use
 
-How to Use
-	1.	Clone or download the repository
-	2.	Install requirements from requirements.txt
-	3.	Open the notebooks to explore data, models, and results
-
-This project demonstrates practical machine learning skills applied to a real dataset and provides useful insights into electric vehicle behavior.
-
-
