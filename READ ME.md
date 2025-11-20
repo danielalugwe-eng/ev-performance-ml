@@ -1,22 +1,26 @@
-# Electric Vehicle Range Prediction API
+Electric Vehicle Performance Analysis (Machine Learning)
 
-A Dockerized FastAPI project that predicts the driving range of electric vehicles (EVs) based on vehicle features using a trained Lasso regression model.
+This project explores the factors that influence the performance and efficiency of electric vehicles. The goal was to analyze real-world EV data, clean and prepare it, build predictive models, and uncover insights that can help improve EV design and usage.
 
----
+The work covers data cleaning, exploratory analysis, feature engineering, model training, evaluation, and interpretation. Several machine learning techniques were tested to understand which variables best predict EV performance.
 
-## Features
+What’s Inside
+	•	Data used for training and testing
+	•	Jupyter notebooks with step-by-step analysis
+	•	Machine learning models and performance summaries
+	•	Visualizations showing trends and important patterns
+	•	Final report with insights and recommendations
 
-- Predict EV range using `POST /predict`
-- Returns predicted range in kilometers
-- Dockerized for easy deployment
-- Input validation with Pydantic
+Key Outcomes
+	•	Identified the most important features that affect electric vehicle performance
+	•	Built a predictive model capable of estimating efficiency from EV characteristics
+	•	Highlighted patterns that can guide manufacturers and engineers in improving energy use
 
----
+How to Use
+	1.	Clone or download the repository
+	2.	Install requirements from requirements.txt
+	3.	Open the notebooks to explore data, models, and results
 
-## Installation
+This project demonstrates practical machine learning skills applied to a real dataset and provides useful insights into electric vehicle behavior.
 
-Clone the repository:
 
-```bash
-git clone https://github.com/danielalugwe-eng/ev-performance-ml
-cd electric_car_ml
