@@ -2,27 +2,27 @@
 
 ## 📌 Overview
 
-This project focuses on building a machine learning system to **predict the performance of electric cars**, such as acceleration, battery efficiency, driving range, or failure likelihood. The goal is to create a robust end-to-end pipeline that collects data, cleans it, trains models, evaluates performance, and deploys results.
+This project focuses on building a **machine learning system to predict electric car performance**, including metrics like acceleration, battery efficiency, driving range, or failure likelihood. The goal is to create a robust end-to-end pipeline that collects data, cleans it, trains models, evaluates performance, and deploys results through a FastAPI endpoint.
 
-Your project aligns with modern ML system design principles, including modular development, experiment tracking, and practical deployment readiness.
+The project follows best practices in modular code design, experiment tracking, and deployment-ready machine learning systems.
 
----
+
 
 ## 🚗 Project Goals
 
 * Predict key electric vehicle (EV) performance metrics.
-* Analyze factors such as battery health, motor temperature, torque, load, environment, and driving behavior.
-* Build a model suitable for real-world EV analytics, fleet management, or predictive maintenance.
-* Provide explainable outputs that help understand why a vehicle underperforms.
+* Analyze factors such as battery health, motor temperature, torque, load, environmental conditions, and driving behavior.
+* Build models suitable for real-world EV analytics, fleet management, or predictive maintenance.
+* Provide interpretable outputs to understand why a vehicle may underperform.
 
 ---
 
 ## 🧠 Key Features
 
-* End-to-end ML pipeline (data → model → evaluation).
-* Modular code structure for scalability.
-* Multiple model architectures (Random Forest, XGBoost, Neural Networks).
-* Support for time-series or sensor-based EV telemetry.
+* End-to-end ML pipeline: data → model → evaluation.
+* Modular code structure for scalability and maintainability.
+* Multiple machine learning algorithms: Random Forest, XGBoost, Neural Networks.
+* Time-series and sensor-based EV telemetry support.
 * Visual analytics: feature importance, error plots, correlations.
 
 ---
@@ -33,7 +33,7 @@ Your project aligns with modern ML system design principles, including modular d
 ElectricCarPerformance/
 │
 ├── data/
-│   ├── raw/                 # Unprocessed EV sensor or performance data
+│   ├── raw/                 # Raw EV sensor or performance data
 │   └── processed/           # Cleaned & prepared datasets
 │
 ├── notebooks/
@@ -47,10 +47,13 @@ ElectricCarPerformance/
 │   ├── feature_engineering.py
 │   ├── train.py             # Training scripts for ML models
 │   ├── evaluate.py          # Evaluation & metrics
-│   └── utils.py             # Helpers
+│   └── utils.py             # Helper functions
 │
 ├── models/
 │   └── saved_models/        # Exported trained models
+│
+├── api/
+│   └── app.py               # FastAPI deployment endpoint
 │
 ├── reports/
 │   ├── figures/             # Plots & charts
@@ -66,14 +69,14 @@ ElectricCarPerformance/
 
 ### 1. Clone Repository
 
-```
+```bash
 git clone https://github.com/yourusername/ElectricCarPerformance.git
 cd ElectricCarPerformance
 ```
 
 ### 2. Create Virtual Environment
 
-```
+```bash
 python -m venv venv
 ```
 
@@ -84,7 +87,7 @@ Activate:
 
 ### 3. Install Dependencies
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
@@ -92,60 +95,57 @@ pip install -r requirements.txt
 
 ## 📊 Data Description
 
-Typical EV telemetry contains:
+EV telemetry typically includes:
 
-* **Voltage, current, power draw**
-* **Battery temperature / motor temperature**
-* **State of Charge (SOC)**
-* **Ambient temperature & humidity**
-* **Vehicle speed & acceleration**
-* **Torque, RPM**
-* **Energy consumption per km**
+* Voltage, current, and power draw
+* Battery temperature and motor temperature
+* State of Charge (SOC)
+* Ambient temperature and humidity
+* Vehicle speed and acceleration
+* Torque and RPM
+* Energy consumption per km
 
-Your model can predict outputs such as:
+Predicted outputs can include:
 
-* Estimated range
+* Estimated driving range
 * Acceleration (0–60 mph)
 * Battery degradation rate
-* Motor overheating likelihood
-* Maintenance/failure probability
+* Motor overheating probability
+* Maintenance or failure likelihood
 
 ---
 
 ## 🧪 Model Training
 
-Training script supports multiple ML algorithms:
+Train models using different algorithms:
 
-```
+```bash
 python src/train.py --model random_forest
 python src/train.py --model xgboost
 python src/train.py --model lstm
 ```
 
-Each model logs:
+Each training run logs:
 
-* Training metrics
-* Validation accuracy/MSE
+* Training and validation metrics
 * Loss curves
-* Feature importance
-
-Supports experiment tracking (Weights & Biases or MLflow if enabled).
+* Feature importance rankings
 
 ---
 
 ## 📈 Evaluation
 
-The evaluation pipeline generates:
+Evaluation generates metrics and visualizations:
 
 * RMSE, MAE, R²
-* Confusion matrix (for classification tasks)
-* Feature importance rankings
-* Prediction vs actual charts
+* Confusion matrix (for classification)
+* Feature importance charts
+* Prediction vs actual plots
 
 Run evaluation:
 
-```
-python src/evaluate.py --model saved_models/best_model.pkl
+```bash
+python src/evaluate.py --model models/saved_models/best_model.pkl
 ```
 
 ---
@@ -157,32 +157,25 @@ Common preprocessing steps:
 * Handling missing sensor values
 * Creating lag features for time-series
 * Combining torque + RPM → power
-* Scaling/normalization (MinMax or StandardScaler)
+* Scaling/normalization (MinMaxScaler or StandardScaler)
 * Encoding categorical driving conditions
 
 ---
 
-## 🚀 Deployment
+## 🚀 Deployment with FastAPI
 
-You can integrate the final model into:
+The trained model is deployed through a FastAPI endpoint:
 
-* A Flask/FastAPI endpoint
-* A web dashboard
-* A mobile application
-* An in-vehicle IoT system
-
-Example API run:
-
-```
+```bash
 uvicorn api.app:app --reload
 ```
 
----
+Example usage:
 
-## 🧮 Example Prediction Code
-
-```
+```python
 from joblib import load
+import requests
+
 model = load("models/saved_models/best_model.pkl")
 
 input_data = {
@@ -200,25 +193,28 @@ print(model.predict([list(input_data.values())]))
 
 ## 📘 Future Improvements
 
-* Add deep learning models like GRU/LSTM for sequential data.
-* Add anomaly detection for rare EV faults.
-* Integrate real-time inference via MQTT/Kafka.
-* Build a dashboard for fleet insights.
+* Add deep learning models (GRU/LSTM) for sequential data
+* Implement anomaly detection for rare EV faults
+* Integrate real-time inference via MQTT/Kafka
+* Build a dashboard for fleet performance insights
 
 ---
 
 ## 🙌 Acknowledgements
 
-This project leverages:
+This project uses:
 
-* Scikit‑learn
+* Scikit-learn
 * XGBoost
 * PyTorch (optional for deep models)
 * Pandas & NumPy
 * Matplotlib & Seaborn
+* FastAPI for deployment
 
 ---
 
 ## 🏁 Summary
 
-This README provides a full overview of your electric car performance prediction project—covering installation, data, models, evaluation, and deployment. It's structured for GitHub, clients, or technical teammates
+This project provides a complete system for predicting electric car performance, including data processing, modeling, evaluation, and deployment through FastAPI. It is structured for technical audiences, GitHub sharing, or client demonstration.
+
+
